@@ -1,0 +1,223 @@
+@import './colors';
+
+@mixin modal_form_styles {
+  $field_height: 40px;
+  .form {
+    width: calc(35vw - 40px);
+    background-color: white;
+    border-radius: 2%;
+    z-index: 1201;
+    padding: 10px 0;
+
+    .accordion {
+      border: none;
+    }
+
+    .accordion_bottom {
+      margin-bottom: 5px;
+    }
+
+    .field {
+      width: 100%;
+      display: grid;
+      margin: 0 0 2% 0;
+      padding: 0 3%;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: 1.4fr 4fr;
+      grid-template-rows: 50px;
+      grid-column-gap: 5px;
+      grid-template-areas: 'l inp';
+      .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__button {
+        display: flex;
+        padding: 0 3%;
+        margin: 0 0 2% 0;
+
+        button {
+          font-size: 0.8rem;
+
+          .button_required {
+            color: red;
+          }
+        }
+      }
+
+      label {
+        margin-bottom: 1%;
+        grid-area: l;
+
+        span {
+          color: red;
+        }
+      }
+
+      .select {
+        width: 100%;
+        grid-area: inp;
+      }
+
+      .input {
+        width: 100%;
+        grid-area: inp;
+      }
+
+      &__group {
+        margin-top: 1%;
+        margin-bottom: 3%;
+        display: flex;
+        justify-content: space-between;
+
+        .group_item {
+          width: 45%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+
+          label {
+            display: block;
+            height: 40px;
+            span {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+
+    .buttons {
+      padding: 2% 0 2% 0;
+      position: sticky;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background-color: white;
+      button {
+        width: 9vw;
+        height: 35px;
+      }
+      .icon_button {
+        font-size: 0.7rem;
+      }
+    }
+  }
+  @media (max-width: 1350px) {
+    .buttons {
+      .icon_button {
+        display: flex;
+        justify-content: center;
+        span {
+          margin: 0;
+        }
+        label {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .buttons {
+      button {
+        font-size: 0.8rem;
+      }
+    }
+
+    .field {
+      label {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+@mixin pageMobileLayout {
+  .page_mobile {
+    height: 100%;
+    overflow: hidden;
+    .map {
+      width: 100%;
+      height: calc(100vh - 48px);
+    }
+  }
+}
+
+@mixin pageWithControlPanelLayout {
+  $w: 650px;
+  .page_main {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    .control_panel {
+      width: $w;
+      height: calc(100vh - 64px);
+      margin-left: 0;
+      transition: margin-left 0.5s;
+      .disable {
+        z-index: 1001;
+        opacity: 0.5;
+        background-color: #4d4d4d;
+        width: 650px;
+        height: calc(100vh - 64px);
+        position: absolute;
+      }
+      &__hidden {
+        margin-left: -$w;
+      }
+      &__open {
+        margin-left: $w;
+      }
+    }
+    .map {
+      width: 100%;
+      height: calc(100vh - 64px);
+    }
+
+    .hide_button {
+      grid-area: hide_button;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 35px;
+      align-content: center;
+      transform: rotate(-90deg);
+      transition: 0.4s;
+      &__hidden {
+        transform: rotate(90deg);
+      }
+      button {
+        display: flex;
+        font-size: 30px;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@mixin pageWithoutControlPanelLayout {
+  .page_contragents {
+    width: 100%;
+    height: calc(100vh - 64px);
+    background-color: $white;
+    overflow-y: scroll;
+    .disable {
+      z-index: 1001;
+      opacity: 0.5;
+      background-color: #4d4d4d;
+      width: 100%;
+      height: calc(100vh - 64px);
+      position: absolute;
+    }
+  }
+}
