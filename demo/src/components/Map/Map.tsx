@@ -3,6 +3,7 @@ import L from 'leaflet';
 
 import { useEffect, useRef } from 'react';
 
+import 'leaflet/dist/leaflet.css';
 import styles from './Map.module.scss';
 
 export function Map() {
@@ -16,6 +17,7 @@ export function Map() {
     window.map = L.map(mapElement.current, {
       center: new L.LatLng(51.505, -0.04),
       zoom: 13,
+
     });
 
     const basemapLayer = L.tileLayer(
