@@ -1,0 +1,51 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: everybodyknowsthispassword
+      PGDATA: /data/postgres
+    container_name: postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - nest_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest-docker-postgres
+    environment:
+      - PORT=${PORT}
+    ports:
+      - '3001:3001'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src
+    networks:
+      - nest_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: nest-pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=everybodyknowsthispassword
+    ports:
+      - '5050:80'
+    depends_on:
+      - db
+    networks:
+      - nest_network
+
+networks:
+  nest_network:
+    driver: bridge
